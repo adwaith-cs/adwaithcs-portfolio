@@ -43,112 +43,98 @@ class Skill {
 }
 
 // ─── Sample Portfolio Data ────────────────────────────────────────────────────
-// Replace every value below with your own information.
-
 class PortfolioData {
-  // Personal Info
-  static const String name  = 'Alex Johnson';
-  static const String title = 'Flutter Developer & UI Designer';
+  // ─── Personal Info ─────────────────────────────────────────────────────────
+  static const String name = 'Adwaith C S';
+  static const String title =
+      'Computer Science Engineer & Full-Stack Developer';
+
   static const String intro =
-      'I build beautiful, cross-platform apps using Flutter. '
-      'Passionate about clean code, great UX, and open source.';
+      '🚀 Engineering robust cross-platform applications and hardware architectures. '
+      'Passionate about systems design, clean code, and building high-impact software solutions.';
+
   static const String aboutMe =
-      "Hi! I'm Alex, a software developer with 3 years of experience building "
-      'mobile and web applications. I love solving real problems through elegant '
-      'code and intuitive design. When I\'m not coding, you\'ll find me hiking '
-      'or experimenting with new frameworks.';
+      "Hi! I'm a B.Tech Computer Science & Engineering student with a deep interest "
+      "in full-stack development, database management systems, and hardware design (Verilog/RISC-V). "
+      "I love engineering real-world solutions that address critical logistical and social needs. "
+      "When I'm not writing Dart or optimizing SQL queries, I'm analyzing intelligent systems or planning technical architectures.";
 
-  // Education
-  static const String degree         = 'B.Sc. Computer Science';
-  static const String university     = 'State University of Technology';
-  static const String graduationYear = '2021';
+  // ─── Education ─────────────────────────────────────────────────────────────
+  static const String degree = 'B.Tech in Computer Science & Engineering';
+  static const String university = 'Vidya Academy of Science and Technology';
+  static const String graduationYear = '2027';
 
-  // Contact
-  static const String email    = 'dev.aneess@gmail.com';
-  static const String phone    = '+91 xxxxxxxxxx';
+  // ─── Contact ───────────────────────────────────────────────────────────────
+  static const String email =
+      'dev.aneess@gmail.com'; // Keeping your provided fallback email
+  static const String phone = '+91 xxxxxxxxxx';
   static const String linkedin = 'linkedin.com/in/aneesan';
-  static const String github   = 'github.com/erTesla';
+  static const String github = 'github.com/erTesla';
 
-  // Skills
+  // ─── Skills (Categorized for Clean UI Badges) ─────────────────────────────
   static const List<Skill> skills = [
-    Skill(name: 'Flutter',      category: 'Mobile'),
-    Skill(name: 'Dart',         category: 'Mobile'),
-    Skill(name: 'Firebase',     category: 'Backend'),
-    Skill(name: 'REST APIs',    category: 'Backend'),
-    Skill(name: 'React',        category: 'Web'),
-    Skill(name: 'HTML & CSS',   category: 'Web'),
+    // Core Engineering & Languages
+    Skill(name: 'Dart & Flutter', category: 'Mobile'),
+    Skill(name: 'Verilog HDL', category: 'Hardware'),
+    Skill(name: 'RISC-V ISA', category: 'Hardware'),
+
+    // Backend & Databases
+    Skill(name: 'Oracle SQL', category: 'Backend'),
+    Skill(name: 'Firebase', category: 'Backend'),
+    Skill(name: 'REST APIs', category: 'Backend'),
+
+    // Tools & Frameworks
     Skill(name: 'Git & GitHub', category: 'Tools'),
-    Skill(name: 'Figma',        category: 'Design'),
+    Skill(name: 'UI Design', category: 'Design'),
   ];
 
-  // Projects
+  // ─── Real Projects (Replaced with your actual portfolio builds) ───────────
   static const List<Project> projects = [
     Project(
-      title: 'TaskFlow',
-      description: 'A productivity app with task boards, reminders, and team '
-          'collaboration built with Flutter and Firebase.',
-      technologies: ['Flutter', 'Firebase', 'Hive'],
-      imageLabel: 'TaskFlow',
+      title: '🛡️ Guardian Angel',
+      description:
+          'An advanced emergency distress signal application designed to instantly connect individuals in critical situations with emergency services via dynamic location tracking and integrated communication protocols.',
+      technologies: ['Flutter', 'Firebase', 'GPS API'],
+      imageLabel: 'GuardianAngel',
     ),
     Project(
-      title: 'WeatherNow',
-      description: 'A real-time weather app that fetches data from OpenWeather '
-          'API and displays animated forecasts.',
-      technologies: ['Flutter', 'REST API', 'Provider'],
-      imageLabel: 'WeatherNow',
+      title: '🩸 Blood Donation Manager',
+      description:
+          'A full-stack logistics platform featuring interactive real-time request tracking, responsive dynamic micro-interactions, and a pulsing urgency indicator UI for critical donor matching.',
+      technologies: ['Flutter Web', 'Dart', 'Database Systems'],
+      imageLabel: 'BloodDonation',
     ),
     Project(
-      title: 'ShopLite',
-      description: 'A lightweight e-commerce app with product listings, cart, '
-          'and a mock checkout flow.',
-      technologies: ['Flutter', 'Dart', 'SQLite'],
-      imageLabel: 'ShopLite',
+      title: '💻 RISC-V Processor Core',
+      description:
+          'Designed and simulated key execution paths, pipeline formatting, and control matrices for a custom RISC-V instruction set processor architecture using hardware description profiles.',
+      technologies: ['Verilog', 'Digital Design', 'EDA Tools'],
+      imageLabel: 'RISCVProcessor',
     ),
     Project(
-      title: 'Portfolio Website',
-      description: 'This very portfolio! Built with Flutter Web as a '
-          'single-page application with smooth scrolling.',
-      technologies: ['Flutter Web', 'Dart'],
-      imageLabel: 'Portfolio',
-    ),
-    Project(
-      title: 'FitTrack',
-      description: 'A fitness tracker that logs workouts, visualises progress '
-          'with charts, and sends daily reminders.',
-      technologies: ['Flutter', 'Firebase', 'fl_chart'],
-      imageLabel: 'FitTrack',
-    ),
-    Project(
-      title: 'NewsReader',
-      description: 'An RSS and news aggregator with category filters, '
-          'bookmarks, and offline reading support.',
-      technologies: ['Flutter', 'REST API', 'Bloc'],
-      imageLabel: 'NewsReader',
+      title: '🗄️ Database Management Hub',
+      description:
+          'An enterprise-grade schema mapping and transaction tracking environment built to handle secure concurrent queries, structured relations, and custom stored procedures.',
+      technologies: ['Oracle SQL', 'Relational DB', 'Optimization'],
+      imageLabel: 'DatabaseHub',
     ),
   ];
 
-  // Experience
+  // ─── Academic Experience / Roles ──────────────────────────────────────────
   static const List<Experience> experiences = [
     Experience(
-      company: 'TechCorp Solutions',
-      position: 'Junior Flutter Developer',
-      duration: 'Jun 2023 – Present',
-      description: 'Building and maintaining cross-platform mobile apps for '
-          'enterprise clients. Led the migration of a legacy Android app to Flutter.',
+      company: 'Vidya Academy of Science & Technology',
+      position: 'B.Tech Core Project Lead',
+      duration: '2025 – Present',
+      description:
+          ' Spearheading agile project development for full-stack social utility applications. Managing architectural blueprints, system states, and collaborating with cross-functional development cohorts.',
     ),
     Experience(
-      company: 'StartUp Hub',
-      position: 'Mobile Intern',
-      duration: 'Jan 2023 – May 2023',
-      description: 'Developed UI components for a React Native app and wrote '
-          'unit tests using Jest. Assisted in Firebase integration.',
-    ),
-    Experience(
-      company: 'Freelance',
-      position: 'Flutter Developer',
-      duration: '2021 – 2022',
-      description: 'Delivered three client projects: a restaurant ordering app, '
-          'a church events app, and a personal finance tracker.',
+      company: 'Academic Engineering Labs',
+      position: 'Hardware Systems Enthusiast',
+      duration: '2024 – 2025',
+      description:
+          'Modeled instruction execution pathways, simulated structural microarchitectures, and evaluated functional register transfer level (RTL) logic configurations.',
     ),
   ];
 }

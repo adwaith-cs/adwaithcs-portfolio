@@ -1,15 +1,4 @@
 // sections/about_section.dart
-//
-// The ABOUT section displays:
-//   • A short "About Me" paragraph
-//   • Education details
-//   • A skills grid
-//
-// LAYOUT:
-//   On desktop: About text | Education (side by side)
-//   On mobile: stacked vertically
-//   Skills: always a Wrap of Chip widgets below
-
 import 'package:flutter/material.dart';
 import '../models/portfolio_data.dart';
 import '../widgets/section_title.dart';
@@ -22,16 +11,19 @@ class AboutSection extends StatelessWidget {
     final bool isDesktop = MediaQuery.of(context).size.width >= 800;
 
     return Container(
-      color: Colors.white,
+      color: const Color(
+        0xFFFAFAFA,
+      ), // Crisp off-white premium canvas background
       padding: EdgeInsets.symmetric(
         horizontal: isDesktop ? 80 : 24,
-        vertical: 60,
+        vertical: 80, // Slightly expanded vertical breathing room
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Reusable section heading widget
           const SectionTitle(text: 'About Me'),
+          const SizedBox(height: 24),
 
           // ── About + Education row/column ────────────────────────────────
           isDesktop
@@ -39,7 +31,9 @@ class AboutSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(child: _buildAboutText()),
-                    const SizedBox(width: 60),
+                    const SizedBox(
+                      width: 80,
+                    ), // Increased spacing for desktop layout
                     Expanded(child: _buildEducation()),
                   ],
                 )
@@ -47,19 +41,25 @@ class AboutSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _buildAboutText(),
-                    const SizedBox(height: 32),
+                    const SizedBox(height: 40),
                     _buildEducation(),
                   ],
                 ),
 
-          const SizedBox(height: 48),
+          const SizedBox(height: 56),
 
-          // ── Skills ───────────────────────────────────────────────────────
+          // ── Skills Heading ──────────────────────────────────────────────────
           const Text(
-            'Skills',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            'Technical Toolbox',
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF1A1A2E), // Sharp modern heading color
+              letterSpacing: -0.5,
+            ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
+
           _buildSkills(),
         ],
       ),
@@ -73,15 +73,19 @@ class AboutSection extends StatelessWidget {
       children: [
         const Text(
           'Who I Am',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF1A1A2E),
+          ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 14),
         Text(
           PortfolioData.aboutMe,
           style: const TextStyle(
-            fontSize: 15,
-            color: Colors.black54,
-            height: 1.7,
+            fontSize: 15.5,
+            color: Colors.redAccent, // Softer on the eyes than absolute black
+            height: 1.75, // Comfortable baseline text line-height
           ),
         ),
       ],
@@ -95,15 +99,31 @@ class AboutSection extends StatelessWidget {
       children: [
         const Text(
           'Education',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF1A1A2E),
+          ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 14),
 
-        // A simple Card to visually group the education info.
-        Card(
-          elevation: 1,
+        // FIXED/UPGRADED: Replaced the basic card layout with a clean minimalist outline panel
+        Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: const Color(0xFFEFEFEF), width: 1.5),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.green.withAlpha(77),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
           child: Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -112,22 +132,41 @@ class AboutSection extends StatelessWidget {
                   PortfolioData.degree,
                   style: const TextStyle(
                     fontSize: 16,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF1A1A2E),
                   ),
                 ),
-                const SizedBox(height: 6),
+                const SizedBox(height: 8),
 
                 // University name
                 Text(
                   PortfolioData.university,
-                  style: TextStyle(color: Colors.blueGrey.shade700),
+                  style: const TextStyle(
+                    color: Color(0xFF3797EF), // Highlight accent blue color
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                  ),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 6),
 
                 // Graduation year
-                Text(
-                  'Graduated: ${PortfolioData.graduationYear}',
-                  style: const TextStyle(color: Colors.black45),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.calendar_today_outlined,
+                      size: 14,
+                      color: Colors.black38,
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      'Graduating Class of ${PortfolioData.graduationYear}',
+                      style: const TextStyle(
+                        color: Colors.black45,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -138,32 +177,43 @@ class AboutSection extends StatelessWidget {
   }
 
   // ── Skills Wrap ────────────────────────────────────────────────────────────
-  // Groups each skill with a category label using a FilterChip-style appearance.
   Widget _buildSkills() {
     return Wrap(
-      spacing: 10,
-      runSpacing: 10,
+      spacing: 12,
+      runSpacing: 12,
       children: PortfolioData.skills.map((skill) {
         return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.blueGrey.shade300),
-            borderRadius: BorderRadius.circular(20),
+            // Modern translucent badge layout
+            color: const Color(0xFF3797EF).withAlpha(56),
+            border: Border.all(
+              color: const Color(0xFF3797EF).withAlpha(90),
+              width: 1,
+            ),
+            borderRadius: BorderRadius.circular(30), // Pill styling
           ),
           child: Row(
-            mainAxisSize: MainAxisSize.min, // Shrink to fit content
+            mainAxisSize: MainAxisSize.min,
             children: [
-              // Category dot indicator
+              // Category active blue dot indicator
               Container(
-                width: 8,
-                height: 8,
+                width: 7,
+                height: 7,
                 decoration: const BoxDecoration(
-                  color: Colors.blueGrey,
+                  color: Color(0xFF3797EF),
                   shape: BoxShape.circle,
                 ),
               ),
-              const SizedBox(width: 8),
-              Text(skill.name, style: const TextStyle(fontSize: 14)),
+              const SizedBox(width: 10),
+              Text(
+                skill.name,
+                style: const TextStyle(
+                  fontSize: 13.5,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xFF1A1A2E),
+                ),
+              ),
             ],
           ),
         );

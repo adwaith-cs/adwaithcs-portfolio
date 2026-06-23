@@ -13,7 +13,7 @@
 // replace the _launchUrl helper with the url_launcher package.
 
 // ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html;
+import 'dart:io' as html;
 
 import 'package:flutter/material.dart';
 import '../models/portfolio_data.dart';
@@ -39,11 +39,7 @@ class ContactSection extends StatelessWidget {
 
           const Text(
             "Let's work together! Reach out via any of the channels below.",
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.black54,
-              height: 1.6,
-            ),
+            style: TextStyle(fontSize: 15, color: Colors.black54, height: 1.6),
           ),
 
           const SizedBox(height: 32),
