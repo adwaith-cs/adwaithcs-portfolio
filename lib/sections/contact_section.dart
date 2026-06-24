@@ -14,7 +14,7 @@
 
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:io' as html;
-
+import 'dart:html' as html;
 import 'package:flutter/material.dart';
 import '../models/portfolio_data.dart';
 import '../widgets/section_title.dart';
@@ -44,35 +44,34 @@ class ContactSection extends StatelessWidget {
 
           const SizedBox(height: 32),
 
-          // ── Contact Items ──────────────────────────────────────────────────
-          _buildContactItem(
-            icon: Icons.email_outlined,
-            label: 'Email',
-            value: PortfolioData.email,
-            url: 'mailto:${PortfolioData.email}',
-          ),
-          _buildContactItem(
-            icon: Icons.phone_outlined,
-            label: 'Phone',
-            value: PortfolioData.phone,
-            url: 'tel:${PortfolioData.phone}',
-          ),
-          _buildContactItem(
-            icon: Icons.link,
-            label: 'LinkedIn',
-            value: PortfolioData.linkedin,
-            url: 'https://${PortfolioData.linkedin}',
-          ),
-          _buildContactItem(
-            icon: Icons.code,
-            label: 'GitHub',
-            value: PortfolioData.github,
-            url: 'https://${PortfolioData.github}',
-          ),
+          // --- Contact Items & Photo ---
+          isDesktop
+              ? Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: _buildPhoto(isDesktop),
+                    ), // Photo on the left for desktop
+                    const SizedBox(width: 80),
+                    Expanded(
+                      flex: 2,
+                      child: _buildContactList(context),
+                    ), // Contact list on the right for desktop
+                  ],
+                )
+              : Column(
+                  children: [
+                    _buildPhoto(isDesktop), // Photo on top for mobile
+                    const SizedBox(height: 40),
+                    _buildContactList(
+                      context,
+                    ), // Contact list below photo for mobile
+                  ],
+                ),
 
           const SizedBox(height: 48),
 
-          // ── Footer ─────────────────────────────────────────────────────────
+          // --- Footer ---
           const Center(
             child: Text(
               'Built with Flutter Web ❤️',
@@ -84,7 +83,65 @@ class ContactSection extends StatelessWidget {
     );
   }
 
-  // ── Contact Row Builder ────────────────────────────────────────────────────
+  // --- Photo Builder ---
+  Widget _buildPhoto(bool isDesktop) {
+    return Center(
+      child: Container(
+        width: isDesktop ? 300 : 200,
+        height: isDesktop ? 400 : 266,
+        decoration: BoxDecoration(
+          image: const DecorationImage(
+            image: AssetImage(
+              'assets/images/image_5.png',
+            ), // Path to your photo
+            fit: BoxFit.cover,
+          ),
+          borderRadius: BorderRadius.circular(20), // Rounded corners
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withAlpha(51),
+              blurRadius: 10,
+              offset: const Offset(0, 5),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // --- Contact List Builder ---
+  Widget _buildContactList(BuildContext context) {
+    return Column(
+      children: [
+        _buildContactItem(
+          icon: Icons.email_outlined,
+          label: 'Email',
+          value: PortfolioData.email,
+          url: 'mailto:${PortfolioData.email}',
+        ),
+        _buildContactItem(
+          icon: Icons.phone_outlined,
+          label: 'Phone',
+          value: PortfolioData.phone,
+          url: 'tel:${PortfolioData.phone}',
+        ),
+        _buildContactItem(
+          icon: Icons.link,
+          label: 'LinkedIn',
+          value: PortfolioData.linkedin,
+          url: 'https://${PortfolioData.linkedin}',
+        ),
+        _buildContactItem(
+          icon: Icons.code,
+          label: 'GitHub',
+          value: PortfolioData.github,
+          url: 'https://${PortfolioData.github}',
+        ),
+      ],
+    );
+  }
+
+  // --- Contact Row Builder ---
   Widget _buildContactItem({
     required IconData icon,
     required String label,
@@ -134,10 +191,11 @@ class ContactSection extends StatelessWidget {
     );
   }
 
-  // ── URL Launcher ───────────────────────────────────────────────────────────
+  // --- URL Launcher ---
   // dart:html's window.open() opens a URL in a new browser tab.
   // No external package required for Flutter Web.
   void _launchUrl(String url) {
+    // Inside your function:
     html.window.open(url, '_blank');
   }
 }

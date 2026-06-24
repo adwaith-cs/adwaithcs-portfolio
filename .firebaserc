@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "flutter-day-3",
+    "staging": "flutter-day-3"
+  },
+  "targets": {},
+  "etags": {}
+}

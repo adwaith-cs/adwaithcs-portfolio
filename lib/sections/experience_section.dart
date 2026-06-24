@@ -70,10 +70,7 @@ class ExperienceSection extends StatelessWidget {
                 // Vertical line connecting to the next item (not shown on last item)
                 if (!isLast)
                   Expanded(
-                    child: Container(
-                      width: 2,
-                      color: Colors.blueGrey.shade100,
-                    ),
+                    child: Container(width: 2, color: Colors.blueGrey.shade100),
                   ),
               ],
             ),
@@ -110,7 +107,9 @@ class ExperienceSection extends StatelessWidget {
                   // Duration badge
                   Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 4),
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.blueGrey.shade50,
                       borderRadius: BorderRadius.circular(12),
@@ -118,7 +117,9 @@ class ExperienceSection extends StatelessWidget {
                     child: Text(
                       exp.duration,
                       style: const TextStyle(
-                          fontSize: 12, color: Colors.blueGrey),
+                        fontSize: 12,
+                        color: Colors.blueGrey,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 10),

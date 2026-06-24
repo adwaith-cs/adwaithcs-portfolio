@@ -69,14 +69,36 @@ class HeroSection extends StatelessWidget {
     );
   }
 
-  // ── Profile Image Placeholder ──────────────────────────────────────────────
+  // ── Profile Image ─────────────────────────────────────────────────────────
   Widget _buildAvatar() {
-    // CircleAvatar with a large radius acts as the profile photo placeholder.
-    // Students: replace with CircleAvatar(backgroundImage: ...) to add a real photo.
+    const String profileImageUrl =
+        'https://media.licdn.com/dms/image/v2/D4E03AQHZwYI9emg3PQ/profile-displayphoto-crop_800_800/B4EZmFS.nYIQAI-/0/1758877970503?e=1784160000&v=beta&t=NYRfT4UDYwXGGZDrYeCw220k79pSeNuejKmjkcUV3ls';
+
     return CircleAvatar(
       radius: 100,
       backgroundColor: Colors.blueGrey.shade200,
-      child: const Icon(Icons.person, size: 100, color: Colors.white),
+      // NetworkImage fetches the image directly from your provided URL
+      backgroundImage: const NetworkImage(profileImageUrl),
+      // The child widget acts as a fallback/loading state before the image loads
+      child: ClipOval(
+        child: Image.network(
+          profileImageUrl,
+          width: 200,
+          height: 200,
+          fit: BoxFit.cover,
+          // Handles error states gracefully if the link breaks or user is offline
+          errorBuilder: (context, error, stackTrace) {
+            return const Icon(Icons.person, size: 100, color: Colors.white);
+          },
+          // Shows a subtle loading indicator while the image is downloading
+          loadingBuilder: (context, child, loadingProgress) {
+            if (loadingProgress == null) return child;
+            return Center(
+              child: CircularProgressIndicator(color: Colors.blueGrey.shade700),
+            );
+          },
+        ),
+      ),
     );
   }
 
@@ -101,10 +123,7 @@ class HeroSection extends StatelessWidget {
         // Professional title
         Text(
           PortfolioData.title,
-          style: TextStyle(
-            fontSize: 20,
-            color: Colors.blueGrey.shade700,
-          ),
+          style: TextStyle(fontSize: 20, color: Colors.blueGrey.shade700),
         ),
 
         const SizedBox(height: 20),
@@ -134,7 +153,9 @@ class HeroSection extends StatelessWidget {
                 backgroundColor: Colors.blueGrey.shade700,
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 28, vertical: 16),
+                  horizontal: 28,
+                  vertical: 16,
+                ),
               ),
               child: const Text('View Projects'),
             ),
@@ -144,7 +165,9 @@ class HeroSection extends StatelessWidget {
               onPressed: () => _scrollToSection('contact'),
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 28, vertical: 16),
+                  horizontal: 28,
+                  vertical: 16,
+                ),
               ),
               child: const Text('Contact Me'),
             ),

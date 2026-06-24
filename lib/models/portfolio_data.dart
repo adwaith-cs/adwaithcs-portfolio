@@ -62,14 +62,15 @@ class PortfolioData {
   // ─── Education ─────────────────────────────────────────────────────────────
   static const String degree = 'B.Tech in Computer Science & Engineering';
   static const String university = 'Vidya Academy of Science and Technology';
-  static const String graduationYear = '2027';
+  static const String graduationYear = '2028';
 
   // ─── Contact ───────────────────────────────────────────────────────────────
   static const String email =
       'dev.aneess@gmail.com'; // Keeping your provided fallback email
   static const String phone = '+91 xxxxxxxxxx';
-  static const String linkedin = 'linkedin.com/in/aneesan';
-  static const String github = 'github.com/erTesla';
+  static const String linkedin =
+      'https://www.linkedin.com/in/adwaith-c-s-26a92a349/';
+  static const String github = 'https://github.com/adwaith-cs';
 
   // ─── Skills (Categorized for Clean UI Badges) ─────────────────────────────
   static const List<Skill> skills = [

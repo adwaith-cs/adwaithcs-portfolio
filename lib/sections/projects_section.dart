@@ -1,15 +1,4 @@
 // sections/projects_section.dart
-//
-// The PROJECTS section displays a responsive grid of project cards.
-//
-// RESPONSIVE GRID:
-//   Desktop (>=1000px): 3 columns
-//   Tablet  (>=600px) : 2 columns
-//   Mobile            : 1 column
-//
-// Flutter's LayoutBuilder widget lets us read the available width
-// and choose the column count at runtime.
-
 import 'package:flutter/material.dart';
 import '../models/portfolio_data.dart';
 import '../widgets/project_card.dart';
@@ -20,38 +9,42 @@ class ProjectsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDesktop = MediaQuery.of(context).size.width >= 800;
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final bool isDesktop = screenWidth >= 800;
 
     return Container(
-      // Slightly off-white background to visually separate from other sections
-      color: Colors.grey.shade50,
+      // Ultra-clean Slate / Off-white background canvas
+      color: const Color(0xFFF8FAFC),
       padding: EdgeInsets.symmetric(
         horizontal: isDesktop ? 80 : 24,
-        vertical: 60,
+        vertical: 96, // Premium breathing space
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SectionTitle(text: 'Projects'),
+          const SizedBox(height: 36),
 
-          // ── Responsive Grid ──────────────────────────────────────────────
-          // LayoutBuilder provides the BoxConstraints of its parent,
-          // meaning we know the exact available width at build time.
+          // ── Advanced Responsive Grid ─────────────────────────────────────
+          // LayoutBuilder listens precisely to parent box constraints to
+          // adapt cross-axis alignments beautifully.
           LayoutBuilder(
             builder: (context, constraints) {
-              // Decide column count based on available width
-              int columnCount;
+              int crossAxisCount;
+              double spacing;
+
               if (constraints.maxWidth >= 1000) {
-                columnCount = 3; // Wide desktop
-              } else if (constraints.maxWidth >= 600) {
-                columnCount = 2; // Tablet / narrow desktop
+                crossAxisCount = 3; // Wide Desktop Grid
+                spacing = 28;
+              } else if (constraints.maxWidth >= 640) {
+                crossAxisCount = 2; // Tablet or Compact Laptop Grid
+                spacing = 24;
               } else {
-                columnCount = 1; // Mobile
+                crossAxisCount = 1; // Native Mobile Column
+                spacing = 20;
               }
 
-              // Build a manual grid using nested Rows inside a Column.
-              // Alternative: GridView.count — students can try that too!
-              return _buildGrid(columnCount);
+              return _buildResponsiveGrid(crossAxisCount, spacing);
             },
           ),
         ],
@@ -59,40 +52,26 @@ class ProjectsSection extends StatelessWidget {
     );
   }
 
-  // Splits the project list into rows of [columnCount] cards each.
-  Widget _buildGrid(int columnCount) {
+  // ── Optimized Grid Builder ───────────────────────────────────────────────
+  // Replaces slow manual row chunking logic with standard high-performance GridView
+  Widget _buildResponsiveGrid(int crossAxisCount, double spacing) {
     final List<Project> projects = PortfolioData.projects;
 
-    // Create rows: slice the projects list into chunks of columnCount.
-    List<Widget> rows = [];
-    for (int i = 0; i < projects.length; i += columnCount) {
-      // Get the slice for this row (may be smaller on the last row)
-      final rowProjects = projects.sublist(
-        i,
-        (i + columnCount > projects.length) ? projects.length : i + columnCount,
-      );
-
-      rows.add(
-        Padding(
-          padding: const EdgeInsets.only(bottom: 20),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: rowProjects.map((project) {
-              return Expanded(
-                child: Padding(
-                  // Add gap between cards in the same row
-                  padding: EdgeInsets.only(
-                    right: project != rowProjects.last ? 20 : 0,
-                  ),
-                  child: ProjectCard(project: project),
-                ),
-              );
-            }).toList(),
-          ),
-        ),
-      );
-    }
-
-    return Column(children: rows);
+    return GridView.builder(
+      // Allows the grid to size itself to content safely within single-page scrolls
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: projects.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: crossAxisCount,
+        mainAxisSpacing: spacing,
+        crossAxisSpacing: spacing,
+        // Enforces a highly stable aesthetic proportion across layout variations
+        childAspectRatio: 1.35,
+      ),
+      itemBuilder: (context, index) {
+        return ProjectCard(project: projects[index]);
+      },
+    );
   }
 }

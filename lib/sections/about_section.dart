@@ -11,29 +11,26 @@ class AboutSection extends StatelessWidget {
     final bool isDesktop = MediaQuery.of(context).size.width >= 800;
 
     return Container(
-      color: const Color(
-        0xFFFAFAFA,
-      ), // Crisp off-white premium canvas background
+      // Clean, premium off-white background canvas
+      color: const Color(0xFFF9FAFB),
       padding: EdgeInsets.symmetric(
         horizontal: isDesktop ? 80 : 24,
-        vertical: 80, // Slightly expanded vertical breathing room
+        vertical: 96, // Balanced vertical space
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Reusable section heading widget
           const SectionTitle(text: 'About Me'),
-          const SizedBox(height: 24),
+          const SizedBox(height: 32),
 
-          // ── About + Education row/column ────────────────────────────────
+          // ── About Content + Education Layout ─────────────────────────────
           isDesktop
               ? Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(child: _buildAboutText()),
-                    const SizedBox(
-                      width: 80,
-                    ), // Increased spacing for desktop layout
+                    const SizedBox(width: 80), // Elegant spacing on desktop
                     Expanded(child: _buildEducation()),
                   ],
                 )
@@ -41,24 +38,24 @@ class AboutSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _buildAboutText(),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 48),
                     _buildEducation(),
                   ],
                 ),
 
-          const SizedBox(height: 56),
+          const SizedBox(height: 64),
 
-          // ── Skills Heading ──────────────────────────────────────────────────
+          // ── Skills Heading ───────────────────────────────────────────────
           const Text(
             'Technical Toolbox',
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF1A1A2E), // Sharp modern heading color
+              color: Color(0xFF111827), // Deep professional navy
               letterSpacing: -0.5,
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 24),
 
           _buildSkills(),
         ],
@@ -66,7 +63,7 @@ class AboutSection extends StatelessWidget {
     );
   }
 
-  // ── About Me paragraph ─────────────────────────────────────────────────────
+  // ── About Me Paragraph ───────────────────────────────────────────────────
   Widget _buildAboutText() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,23 +73,24 @@ class AboutSection extends StatelessWidget {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF1A1A2E),
+            color: Color(0xFF111827),
+            letterSpacing: -0.3,
           ),
         ),
-        const SizedBox(height: 14),
+        const SizedBox(height: 16),
         Text(
           PortfolioData.aboutMe,
           style: const TextStyle(
-            fontSize: 15.5,
-            color: Colors.redAccent, // Softer on the eyes than absolute black
-            height: 1.75, // Comfortable baseline text line-height
+            fontSize: 15,
+            color: Color(0xFF4B5563), // Slate grey text for premium readability
+            height: 1.65, // Comfortable typography leading
           ),
         ),
       ],
     );
   }
 
-  // ── Education block ────────────────────────────────────────────────────────
+  // ── Education Card Panel ─────────────────────────────────────────────────
   Widget _buildEducation() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,66 +100,66 @@ class AboutSection extends StatelessWidget {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF1A1A2E),
+            color: Color(0xFF111827),
+            letterSpacing: -0.3,
           ),
         ),
-        const SizedBox(height: 14),
+        const SizedBox(height: 16),
 
-        // FIXED/UPGRADED: Replaced the basic card layout with a clean minimalist outline panel
         Container(
           width: double.infinity,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFFEFEFEF), width: 1.5),
+            border: Border.all(color: const Color(0xFFE5E7EB), width: 1),
             boxShadow: [
               BoxShadow(
-                color: Colors.green.withAlpha(77),
-                blurRadius: 10,
+                color: const Color(0xFF000000).withAlpha(10),
+                blurRadius: 12,
                 offset: const Offset(0, 4),
               ),
             ],
           ),
           child: Padding(
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.all(28),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Degree name
+                // Degree Name
                 Text(
                   PortfolioData.degree,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF1A1A2E),
+                    color: Color(0xFF111827),
                   ),
                 ),
                 const SizedBox(height: 8),
 
-                // University name
+                // University / Institute Name
                 Text(
                   PortfolioData.university,
                   style: const TextStyle(
-                    color: Color(0xFF3797EF), // Highlight accent blue color
+                    color: Color(0xFF2563EB), // Elegant Royal Blue Accent
                     fontWeight: FontWeight.w600,
                     fontSize: 14,
                   ),
                 ),
-                const SizedBox(height: 6),
+                const SizedBox(height: 14),
 
-                // Graduation year
+                // Timeline Frame
                 Row(
                   children: [
                     const Icon(
                       Icons.calendar_today_outlined,
                       size: 14,
-                      color: Colors.black38,
+                      color: Color(0xFF9CA3AF),
                     ),
-                    const SizedBox(width: 6),
+                    const SizedBox(width: 8),
                     Text(
                       'Graduating Class of ${PortfolioData.graduationYear}',
                       style: const TextStyle(
-                        color: Colors.black45,
+                        color: Color(0xFF6B7280),
                         fontSize: 13,
                         fontWeight: FontWeight.w500,
                       ),
@@ -176,42 +174,37 @@ class AboutSection extends StatelessWidget {
     );
   }
 
-  // ── Skills Wrap ────────────────────────────────────────────────────────────
+  // ── Technical Skills Grid/Wrap ───────────────────────────────────────────
   Widget _buildSkills() {
     return Wrap(
-      spacing: 12,
-      runSpacing: 12,
+      spacing: 10,
+      runSpacing: 10,
       children: PortfolioData.skills.map((skill) {
         return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
           decoration: BoxDecoration(
-            // Modern translucent badge layout
-            color: const Color(0xFF3797EF).withAlpha(56),
-            border: Border.all(
-              color: const Color(0xFF3797EF).withAlpha(90),
-              width: 1,
-            ),
-            borderRadius: BorderRadius.circular(30), // Pill styling
+            color: const Color(0xFFF3F4F6),
+            border: Border.all(color: const Color(0xFFE5E7EB), width: 1),
+            borderRadius: BorderRadius.circular(8),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Category active blue dot indicator
               Container(
-                width: 7,
-                height: 7,
+                width: 6,
+                height: 6,
                 decoration: const BoxDecoration(
-                  color: Color(0xFF3797EF),
+                  color: Color(0xFF9CA3AF),
                   shape: BoxShape.circle,
                 ),
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: 8),
               Text(
                 skill.name,
                 style: const TextStyle(
                   fontSize: 13.5,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF1A1A2E),
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFF374151),
                 ),
               ),
             ],
