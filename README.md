@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Flutter Web Portfolio — Student Starter Project
 
 A beginner-friendly single-page portfolio website built with **Flutter Web**.
@@ -246,3 +247,6 @@ The site is intentionally plain. Your job is to **make it look like a real devel
 | Reusable `StatelessWidget` | `widgets/` |
 | `Wrap` for chip layouts | `about_section.dart` |
 | `IntrinsicHeight` for timeline | `experience_section.dart` |
+=======
+# adwaithcs-portfolio
+>>>>>>> dd8362c9e9408c6f2aab584195d0001bf6fa8238
